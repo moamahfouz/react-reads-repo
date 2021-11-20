@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class SingleBook extends Component {
   render() {
-  console.log('passed to single',this.props);
+  //console.log('passed to single',this.props);
     return (
       <div className="book">
         <div className="book-top">
