@@ -2,6 +2,10 @@ import React, { Component } from "react";
 
 class SingleBook extends Component {
   render() {  
+    let thumbnail = '';
+    if (this.props.book.imageLinks) 
+        thumbnail = this.props.book.imageLinks.thumbnail
+  
     return (
       <div className="book">
         <div className="book-top">
@@ -10,7 +14,7 @@ class SingleBook extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url("${this.props.book.imageLinks.thumbnail}")`,
+              backgroundImage: `url("${thumbnail}")`,
             }}
           />
           <div className="book-shelf-changer">
