@@ -1,7 +1,15 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 
 class SingleBook extends Component {
+  static propTypes = {
+    book: PropTypes.object.isRequired,
+}
+
   render() {  
+    
+    //console.log(typeof this.props.book);
+
     let thumbnail = '';
     if (this.props.book.imageLinks) 
         thumbnail = this.props.book.imageLinks.thumbnail

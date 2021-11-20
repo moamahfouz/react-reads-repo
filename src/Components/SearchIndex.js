@@ -3,8 +3,13 @@ import Loader from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "./../BooksAPI";
 import SingleBook from "./SingleBook";
+import PropTypes from 'prop-types'
 
 class SearchIndex extends Component {
+  static propTypes = {
+    changeShelf: PropTypes.func.isRequired,
+}
+
   state = {
     query: "",
     matchingSearchResults: [],
