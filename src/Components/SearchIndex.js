@@ -38,8 +38,7 @@ class SearchIndex extends Component {
     }
   };
 
-  render() {
-    //console.log(this.props);
+  render() {  
     const { query, loading, matchingSearchResults } = this.state;
     return (
       <div className="search-books">
@@ -64,8 +63,7 @@ class SearchIndex extends Component {
               {matchingSearchResults.map((matchedBook) => (
                 <li key={matchedBook.id}>
                   <SingleBook
-                    book={matchedBook}
-                    d={console.log(matchedBook)}
+                    book={matchedBook}                    
                     changeShelf={this.props.changeShelf}
                     currentShelf={matchedBook.shelf}
                   />

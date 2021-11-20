@@ -4,8 +4,7 @@ import SingleBook from "./SingleBook";
 
 
 class Home extends Component {
-  render() {
-    //console.log('passed to home',this.props);
+  render() {  
 
     return (    
         <div className="list-books">
