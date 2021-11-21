@@ -3,12 +3,13 @@ import Loader from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "./../BooksAPI";
 import SingleBook from "./SingleBook";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 class SearchIndex extends Component {
   static propTypes = {
     changeShelf: PropTypes.func.isRequired,
-}
+    allBooks: PropTypes.array.isRequired,
+  };
 
   state = {
     query: "",
@@ -17,12 +18,12 @@ class SearchIndex extends Component {
 
   getQuery = (value) => {
     this.setState({
-      query: value.trim(),
+      query: value,
       loading: true,
     });
 
     if (value.length !== 0) {
-      BooksAPI.search(value).then((res) => {
+      BooksAPI.search(value.trim()).then((res) => {
         if (res.error) {
           this.setState({
             matchingSearchResults: [],
@@ -43,8 +44,10 @@ class SearchIndex extends Component {
     }
   };
 
-  render() {  
+  render() {
     const { query, loading, matchingSearchResults } = this.state;
+    const { allBooks } = this.props;
+    
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -65,15 +68,22 @@ class SearchIndex extends Component {
         {!loading ? (
           <div className="search-books-results">
             <ol className="books-grid">
-              {matchingSearchResults.map((matchedBook) => (
-                <li key={matchedBook.id}>
-                  <SingleBook
-                    book={matchedBook}                    
-                    changeShelf={this.props.changeShelf}
-                    currentShelf={matchedBook.shelf}
-                  />
-                </li>
-              ))}
+              {matchingSearchResults.map((matchedBook) => {
+                let shelf = "none";
+
+                allBooks.forEach((book) => {
+                  if (book.id === matchedBook.id) shelf = book.shelf;
+                });
+                return (
+                  <li key={matchedBook.id}>
+                    <SingleBook
+                      book={matchedBook}
+                      changeShelf={this.props.changeShelf}
+                      currentShelf={shelf}
+                    />
+                  </li>
+                );
+              })}
             </ol>
           </div>
         ) : (

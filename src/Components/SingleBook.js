@@ -6,13 +6,13 @@ class SingleBook extends Component {
     book: PropTypes.object.isRequired,
 }
 
-  render() {  
-    
-    //console.log(typeof this.props.book);
+  render() {        
+
+    const {book, changeShelf, currentShelf} = this.props;
 
     let thumbnail = '';
-    if (this.props.book.imageLinks) 
-        thumbnail = this.props.book.imageLinks.thumbnail
+    if (book.imageLinks) 
+        thumbnail = book.imageLinks.thumbnail
   
     return (
       <div className="book">
@@ -28,9 +28,9 @@ class SingleBook extends Component {
           <div className="book-shelf-changer">
             <select
               onChange={(e) =>
-                this.props.changeShelf(this.props.book, e.target.value)
+                changeShelf(book, e.target.value)
               }
-              value={this.props.currentShelf}
+              value={currentShelf}
             >
               <option value="move" disabled>
                 Move to...
@@ -42,8 +42,8 @@ class SingleBook extends Component {
             </select>
           </div>
         </div>
-        <div className="book-title">{this.props.book.title}</div>
-        <div className="book-authors">{this.props.book.authors}</div>
+        <div className="book-title">{book.title}</div>
+        <div className="book-authors">{book.authors}</div>
       </div>
     );
   }
